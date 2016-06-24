@@ -22,3 +22,23 @@ Parse scanline := method(
 		)
 
 
+Parse link := method(
+		line,
+		regex := Regex with("\\[.*\\]|\\(.*\\)") extended
+		words := line matchesOfRegex(regex)
+if(words at(0),
+		word := words at(0) string exSlice(1, -1)
+		link := words at(1) string exSlice(1, -1)
+		regex := Regex with("\\[.*\\]\\(.*\\)") extended
+		result := line matchesOfRegex(regex) replace(m, "<a href=\"" .. link .. "\">" .. word .. "</a>")
+		return result
+,
+return line
+)
+		)
+
+
+
+
+
+

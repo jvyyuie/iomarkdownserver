@@ -22,7 +22,8 @@ WebRequest := Object clone do(
 			arrays foreach(i,
 				line,
 				out := Parse scanline(line)
-				html = html .. out
+				out2 := Parse link(out)
+				html = html .. out2
 			)
 
 			socket streamWrite("HTTP/1.0 200 OK\n")
