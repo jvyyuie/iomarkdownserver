@@ -67,6 +67,10 @@ __粗体文字内容__
 
 7. 链接（Links）
 
+行列式：This is [an example](http://www.iolanguage.net/ "Title") inline link.
+
+参考式：[This link](http://www.iolanguage.net/) has no title attribute.
+
 8. 图片（Images）
 
 9. 代码（HTML中所谓的Code）
