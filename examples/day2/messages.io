@@ -4,43 +4,25 @@ Parse := Object clone
 Parse scanline := method(
 		line,
 		line := line asMutable
-		if(line exSlice(0, 6) compare("##### ")==0,
+		if(line exSlice(0, 6) compare("##### ")==0) then(
 			line replaceSeq("##### ", "<h5>")
-			line .. "</h5>"
-			,
-			(
-			 if(line exSlice(0, 5) compare("#### ")==0,
-				 line replaceSeq("#### ", "<h4>")
-				 line .. "</h4>"
-				 ,
-				 (
-				  if(line exSlice(0, 4) compare("### ")==0,
-					  line replaceSeq("### ", "<h3>")
-					  line .. "</h3>"
-					  ,
-					  (
-					   if(line exSlice(0, 3) compare("## ")==0,
-						   line replaceSeq("## ", "<h2>")
-						   line .. "</h2>"
-						   ,
-						   (
-						    if(line exSlice(0, 2) compare("# ")==0,
-							    line replaceSeq("# ", "<h1>")
-							    line .. "</h1>"
-							    ,
-							    (
-							     line := line
-							    )
-						      )
-						   )
-					     )
-					  )
-					  )
-					  )
-					  )
-					  )
-					  )
-					  )
+			return line .. "</h5>"
+		) elseif(line exSlice(0, 5) compare("#### ")==0) then(
+			 line replaceSeq("#### ", "<h4>")
+			 return line .. "</h4>"
+		) elseif(line exSlice(0, 4) compare("### ")==0) then(
+			  line replaceSeq("### ", "<h3>")
+			  return line .. "</h3>"
+		) elseif(line exSlice(0, 3) compare("## ")==0) then(
+			   line replaceSeq("## ", "<h2>")
+			   return line .. "</h2>"
+		) elseif(line exSlice(0, 2) compare("# ")==0) then(
+			    line replaceSeq("# ", "<h1>")
+			    return line .. "</h1>"
+		) else (
+			     return line
+		     )
+		)
 
 arr := List clone append(
 		"### abcaaaa",
