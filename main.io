@@ -9,6 +9,9 @@ WebRequest := Object clone do(
 		if(socket isOpen == false, return)
 		request := socket readBuffer betweenSeq("GET ", " HTTP")         
 
+		# 专门处理没有输入uri的情况
+		if(request compare("/")==0, request := "/index")
+
 		data := cache atIfAbsentPut(request, LoadFile read(request))
 		if(data,
 			html := "" asMutable

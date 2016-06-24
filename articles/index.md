@@ -6,6 +6,7 @@ b := "world"
 
 c := a .. b # c is "helloworld"
 
-[link](http://www.iolanguage.net/)
 
-[中文](http://www.iolanguage.net/)
+[首页](/index)
+
+[语法规则](/wiki)
