@@ -13,9 +13,9 @@ WebRequest := Object clone do(
 		request := socket readBuffer betweenSeq("GET ", " HTTP")         
 		# 修复request是空（HEAD）的问题，不过这个修复不是正确的机制。
 		# 更合理的是，上面的第10行，进行各处非GET类处理
-		if(request == nil, request := "/index")
+		if(request == nil, request = "/index")
 		# 专门处理没有输入uri的情况
-		if(request compare("/")==0, request := "/index")
+		if(request compare("/")==0, request = "/index")
 		data := cache atIfAbsentPut(request, LoadFile read(request))
 		if(data,
 			# 将内容中的\r\n、\r、\n\r，统一替换成\n，然后根据\n分割成数组，再一行行进行处理、扫描、转换

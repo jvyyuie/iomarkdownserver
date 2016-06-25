@@ -1,5 +1,3 @@
-#!/usr/bin/env io
-
 # 加粗有问题，如果闭口符号后面没有其他内容，则会不进行闭口操作
 
 Parse := Object clone
