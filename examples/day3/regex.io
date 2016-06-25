@@ -8,15 +8,19 @@ str := "The website url is [iolanguage](http://www.iolanguage.net/), click to vi
 str println
 
 
-regex := Regex with("\\[.*\\]|\\(.*\\)") extended
-words := str matchesOfRegex(regex)
-word := words at(0) string exSlice(1, -1)
-link := words at(1) string exSlice(1, -1)
-
 regex := Regex with("\\[.*\\]\\(.*\\)") extended
-result := str matchesOfRegex(regex) replace(m, "<a href=\"" .. link .. "\">" .. word .. "</a>")
+if(str matchesRegex(regex) == true,
+	regex := Regex with("\\[.*\\]|\\(.*\\)") extended
+	words := str matchesOfRegex(regex)
 
-result println
+	word := words at(0) string exSlice(1, -1)
+	link := words at(1) string exSlice(1, -1)
+
+	regex := Regex with("\\[.*\\]\\(.*\\)") extended
+	result := str matchesOfRegex(regex) replace(m, "<a href=\"" .. link .. "\">" .. word .. "</a>")
+	result println
+)
+
 
 
 

@@ -52,8 +52,8 @@ WebRequest := Object clone do(
 )                                                                        
 
 WebServer := Server clone do(
-	setPort(8000)
-	socket setHost("127.0.0.1")
+	setPort(80)
+	socket setHost("0.0.0.0")
 	requests := List clone
 	handleSocket := method(socket, WebRequest handleSocket(socket, self))
 )
