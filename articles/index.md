@@ -7,8 +7,6 @@ b := "world"
 (a .. b) println
 
 
-[首页](/index)
-
 [语法规则](/wiki)
 
 # 项目Github地址
