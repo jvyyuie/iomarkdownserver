@@ -24,9 +24,11 @@ WebRequest := Object clone do(
 			arrays := data split("\n")
 			arrays foreach(i,
 				line,
-				out := Parse scanline(line)
-				out2 := Parse link(out)
-				html = html .. out2
+				out1 := Parse scanline(line)	# 逐行扫描，处理每一行中的标题符号
+				out2 := Parse link(out1)	# 逐行扫描，处理每行中的link链接
+				out3 := Parse strong(out2)	# 逐行扫描，处理每行的**、__符号
+				out4 := Parse em(out3)		# 逐行扫描，处理每行的*、_符号
+				html = html .. out4
 			)
 
 			socket streamWrite("HTTP/1.0 200 OK\n")

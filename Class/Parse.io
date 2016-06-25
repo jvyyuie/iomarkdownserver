@@ -1,5 +1,7 @@
 #!/usr/bin/env io
 
+# 加粗有问题，如果闭口符号后面没有其他内容，则会不进行闭口操作
+
 Parse := Object clone
 Parse scanline := method(
 		line,
@@ -34,4 +36,59 @@ Parse link := method(
 			,
 			return line
 		  )
+		)
+
+Parse strong := method(line,
+		words := line split("**", "--")
+		if(words size == 1, return line)
+		return Parse strongfill(words))
+Parse em := method(line,
+		words := line split("*", "-")
+		if(words size == 1, return line)
+		return Parse emfill(words))
+Parse strongfill := method(lists,
+		ret := List clone
+		isleft := true
+		parts := lists size
+		step := 0
+		lists foreach(m,
+			step := step+1
+			if(isleft==true,
+				ret append(m)
+				if(step != parts,
+					ret append("<strong>")
+				  )
+				isleft := false
+				,
+				ret append(m)
+				if(step != parts,
+					ret append("</strong>")
+				  )
+				isleft := true
+			  )
+			)
+		return ret join
+		)
+Parse emfill := method(lists,
+		ret := List clone
+		isleft := true
+		parts := lists size
+		step := 0
+		lists foreach(m,
+			step := step+1
+			if(isleft==true,
+				ret append(m)
+				if(step != parts,
+					ret append("<em>")
+				  )
+				isleft := false
+				,
+				ret append(m)
+				if(step != parts,
+					ret append("</em>")
+				  )
+				isleft := true
+			  )
+			)
+		return ret join
 		)
