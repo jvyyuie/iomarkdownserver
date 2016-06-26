@@ -3,17 +3,14 @@ doFile("./Config/Config.io")
 doFile("./Class/Parse.io")
 doFile("./Class/LoadFile.io")
 doFile("./Class/ServerLog.io")
+doFile("./Class/HeadParser.io")
 WebRequest := Object clone do(
 	cache := Map clone
 	handleSocket := method(socket, server,
 		socket streamReadNextChunk
 		if(socket isOpen == false, return)
 		SystemLog write(socket readBuffer)
-		# 下面这一行，要利用新的类，具体通过Header信息分析出来
-		request := socket readBuffer betweenSeq("GET ", " HTTP")         
-		# 修复request是空（HEAD）的问题，不过这个修复不是正确的机制。
-		# 更合理的是，上面的第10行，进行各处非GET类处理
-		if(request == nil, request = "/index")
+		request := HeadParser ?getUri(socket readBuffer)
 		# 专门处理没有输入uri的情况
 		if(request compare("/")==0, request = "/index")
 		data := cache atIfAbsentPut(request, LoadFile read(request))
