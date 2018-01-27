@@ -1,0 +1,15 @@
+InlineTypes := Map clone
+InlineTypes atPut("\"", List clone append("SpecialCharacter"))
+InlineTypes atPut("!", List clone append("Image"))
+InlineTypes atPut("&", List clone append("SpecialCharacter"))
+InlineTypes atPut("*", List clone append("Emphasis"))
+InlineTypes atPut(":", List clone append("Url"))
+InlineTypes atPut("<", List clone append("UrlTag", "EmailTag", "Markup", "SpecialCharacter"))
+InlineTypes atPut(">", List clone append("SpecialCharacter"))
+InlineTypes atPut("[", List clone append("Link"))
+InlineTypes atPut("_", List clone append("Emphasis"))
+InlineTypes atPut("`", List clone append("Code"))
+InlineTypes atPut("~", List clone append("Strikethrough"))
+InlineTypes atPut("\\\\", List clone append("EscapeSequence"))
+
+InlineTypes foreach(k, v, (k .. ":" .. v) println)
